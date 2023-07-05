@@ -2,6 +2,9 @@ import csv
 import json
 import duckdb
 import pandas as pd
+import os
+from decouple import config
+
 
 CSV_PATH = 'sales-data-set.csv'
 JSON_PATH = 'sales-data-set.json'
@@ -19,6 +22,12 @@ def convert_csv_to_json(csv_file_path, json_file_path):
 
 data = duckdb.read_csv(CSV_PATH)
 query = f"""SELECT * FROM read_csv_auto('{CSV_PATH}') LIMIT 2"""
-print(duckdb.sql(query))
+#print(duckdb.sql(query))
+
+if __name__ == '__main__':
+    table = 'DYNAMO_TABLE'
+    key = os.environ.get(table)
+    print(key)
+
 
 

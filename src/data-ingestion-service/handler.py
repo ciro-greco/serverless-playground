@@ -1,5 +1,6 @@
 import boto3
 import json
+import os
 
 
 def lambda_handler(event, context):
@@ -13,7 +14,10 @@ def lambda_handler(event, context):
 
 
     # Specify the DynamoDB table name
-    table_name = 'SalesDataSet'
+    table_name = os.environ.get('dynamo_table_name')
+    print(table_name)
+
+    #table_name = 'SalesDataSet'
     try:
         response = s3.get_object(Bucket=bucket_name, Key=file_key)
         json_data = response['Body'].read().decode('utf-8')

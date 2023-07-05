@@ -1,7 +1,10 @@
 import boto3
-from decouple import config
+import os
+from dotenv import load_dotenv
 
-BUCKET = config('S3_BUCKET_NAME_1')
+load_dotenv()
+
+BUCKET = os.getenv('S3_BUCKET_NAME')
 FILE_PATH = 'sales-data-set.json'
 S3_KEY = 'sales-data-set.json'
 
@@ -44,4 +47,4 @@ def upload_to_s3(bucket_name, file_path, s3_key):
 if __name__ == '__main__':
 
     #create_dynamodb_table()
-    upload_to_s3('csv-folder-0912398123', FILE_PATH, S3_KEY)
+    upload_to_s3(BUCKET, FILE_PATH, S3_KEY)

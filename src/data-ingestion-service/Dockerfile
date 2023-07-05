@@ -1,10 +1,9 @@
 # Use the official Python base image
-FROM public.ecr.aws/lambda/python:3.9
+FROM --platform=linux/amd64 public.ecr.aws/lambda/python:3.9
 
 # Install pip and other dependencies
 RUN pip3 install --upgrade pip \
     && pip3 install boto3==1.26.3 python-decouple==3.8
-
 
 COPY handler.py .
 

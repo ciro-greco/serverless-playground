@@ -1,9 +1,12 @@
-service: s3-to-dynamo-service
+service: data-ingestion-service
+useDotenv: true
+
 
 frameworkVersion: '3'
 
 provider:
   name: aws
+
   ecr:
     # In this section you can define images that will be built locally and uploaded to ECR
     images:
@@ -12,7 +15,7 @@ provider:
 
 # you can overwrite defaults here
 #  stage: dev
-  region: us-east-1
+  region: 'us-east-1'
   iam:
     role:
       statements:
@@ -25,7 +28,11 @@ provider:
 functions:
   write-data-in-dynamo:
     image: appimage
+    environment:
+      dynamo_table_name: SalesDataSet
+
     events:
       - s3:
           bucket: csv-folder-0912398123
           event: s3:ObjectCreated:*
+          existing: true

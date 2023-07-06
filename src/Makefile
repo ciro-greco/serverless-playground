@@ -12,5 +12,5 @@ create-venv:
 activate-venv:
 	 source ./venv/bin/activate && pip install -r requirements.txt
 
-deploy:
+deploy-data-ingestion:
 	cd data-ingestion-service && serverless deploy

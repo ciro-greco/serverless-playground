@@ -15,7 +15,7 @@ provider:
 
 # you can overwrite defaults here
 #  stage: dev
-  region: 'us-east-1'
+  region: ${env:AWS_DEFAULT_REGION, 'us-east-1'}
   iam:
     role:
       statements:
@@ -29,7 +29,7 @@ functions:
   write-data-in-dynamo:
     image: appimage
     environment:
-      dynamo_table_name: SalesDataSet
+      dynamo_table_name: ${env:DYNAMO_TABLE}
 
     events:
       - s3:

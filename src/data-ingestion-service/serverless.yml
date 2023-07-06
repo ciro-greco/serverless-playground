@@ -33,6 +33,5 @@ functions:
 
     events:
       - s3:
-          bucket: csv-folder-0912398123
+          bucket: ${env:S3_BUCKET_NAME}
           event: s3:ObjectCreated:*
-          existing: true
